@@ -10,5 +10,9 @@ module.exports = (sequelize, DataTypes) => {
     },
   );
 
+  grupos.associate = (models) => {
+    grupos.hasMany(models.clientes, { foreignKey: 'grupo_id', as: 'clientes' });
+  };
+
   return grupos;
 };
