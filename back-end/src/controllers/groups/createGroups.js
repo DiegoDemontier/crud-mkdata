@@ -1,5 +1,5 @@
 const { created } = require('../../utils/statusCode');
-const createGroups = require('../../services/createGroups');
+const createGroups = require('../../services/groups/createGroups');
 
 module.exports = async (req, res, next) => {
   try {
