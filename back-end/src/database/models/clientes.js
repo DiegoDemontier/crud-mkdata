@@ -2,13 +2,13 @@ module.exports = (sequelize, DataTypes) => {
   const clientes = sequelize.define(
     'clientes',
     {
-      nome: DataTypes.STRING(100),
+      nomeCliente: DataTypes.STRING(100),
       tipo: DataTypes.STRING(50),
       ativo: DataTypes.BOOLEAN,
     },
     {
-      timestamps: false,
-      createdAt: 'data_de_cadastro',
+      createdAt: 'data_cadastro',
+      updatedAt: false,
     },
   );
 

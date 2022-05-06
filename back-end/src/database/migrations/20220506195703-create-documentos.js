@@ -9,7 +9,8 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      nome: {
+      nomeDocumento: {
+        field: 'nome_documento',
         type: Sequelize.STRING,
         allowNull: false,
       },

@@ -22,8 +22,10 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-      dado: {
+      dadoDocumento: {
+        field: 'dado_documento',
         type: Sequelize.STRING,
+        allowNull: false,
       },
     });
   },

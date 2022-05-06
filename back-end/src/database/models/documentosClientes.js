@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const documentosClientes = sequelize.define(
     'documentosClientes',
     {
-      dado: DataTypes.STRING(100),
+      dadoDocumento: DataTypes.STRING(100),
     },
     { 
       timestamps: false,

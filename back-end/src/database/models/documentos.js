@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const documentos = sequelize.define(
     'documentos',
     {
-      nome: DataTypes.STRING(100),
+      nomeDocumento: DataTypes.STRING(100),
     },
     {
       timestamps: false,

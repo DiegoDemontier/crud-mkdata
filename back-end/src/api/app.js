@@ -3,7 +3,7 @@ const cors = require('cors');
 
 const errorMiddleware = require('../middleware/errorHandle');
 const groupsRoutes = require('../router/groups');
-const customersRoutes = require('../router/groups');
+const customersRoutes = require('../router/customers');
 
 const app = express();
 

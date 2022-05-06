@@ -17,7 +17,8 @@ module.exports = {
         references: { model: 'grupos', key: 'id' },
         onUpdate: 'CASCADE',
       },
-      nome: {
+      nomeCliente: {
+        field: 'nome_cliente',
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -29,7 +30,7 @@ module.exports = {
         allowNull: false,
       },
       createdAt: {
-        field: 'data_de_cadastro',
+        field: 'data_cadastro',
         allowNull: false,
         type: Sequelize.DATE,
       },
