@@ -1,11 +1,11 @@
-const createGroups = require('./createGroups');
-const editGroups = require('./editGroups');
-const deleteGroups = require('./deleteGroups');
+const createGroup = require('./createGroup');
+const editGroup = require('./editGroup');
+const deleteGroup = require('./deleteGroup');
 const findAllGroups = require('./findAllGroups');
 
 module.exports = {
-  createGroups,
-  editGroups,
-  deleteGroups,
+  createGroup,
+  editGroup,
+  deleteGroup,
   findAllGroups,
 };

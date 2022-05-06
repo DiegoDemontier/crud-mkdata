@@ -1,11 +1,11 @@
 const { success } = require('../../utils/statusCode');
-const editGroups = require('../../services/groups/editGroups');
+const editGroup = require('../../services/groups/editGroup');
 
 module.exports = async (req, res, next) => {
   try {
     const { nome, ativo } = req.body;
 
-    await editGroups(nome, ativo);
+    await editGroup(nome, ativo);
     
     return res.status(success).json({ message: 'Grupo editado com sucesso' });
   } catch (error) {

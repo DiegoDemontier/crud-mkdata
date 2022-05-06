@@ -1,16 +1,16 @@
 const express = require('express');
 const {
-  createGroups,
-  editGroups,
-  deleteGroups,
+  createGroup,
+  editGroup,
+  deleteGroup,
   findAllGroups,
 } = require('../../controllers/groups');
 
 const routerUsers = express.Router();
 
 routerUsers.get('/', findAllGroups);
-routerUsers.post('/', createGroups);
-routerUsers.put('/', editGroups);
-routerUsers.delete('/:id', deleteGroups);
+routerUsers.post('/', createGroup);
+routerUsers.put('/', editGroup);
+routerUsers.delete('/:id', deleteGroup);
 
 module.exports = routerUsers;
