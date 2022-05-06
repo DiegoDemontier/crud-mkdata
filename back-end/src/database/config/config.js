@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 module.exports = {
     development: {
         username: process.env.DB_USER,
@@ -7,10 +8,9 @@ module.exports = {
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
         dialect: process.env.DB_DIALECT,
-        logging: true,
         define: {
           underscored: true,
-        }
+        },
     },
     test: {
         username: process.env.DB_USER,
@@ -19,10 +19,9 @@ module.exports = {
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
         dialect: process.env.DB_DIALECT,
-        logging: true,
         define: {
           underscored: true,
-        }
+        },
     },
     production: {
         username: process.env.DB_USER,
@@ -33,6 +32,6 @@ module.exports = {
         dialect: process.env.DB_DIALECT,
         define: {
           underscored: true,
-        }
-    }
+        },
+    },
 };
