@@ -1,0 +1,27 @@
+{
+  "name": "crud-mkdata-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/api/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "author": "Diego Demontier",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.19.0",
+    "joi": "^17.6.0"
+  },
+  "devDependencies": {
+    "eslint-config-trybe-backend": "1.0.3",
+    "nodemon": "^2.0.15",
+    "sequelize-cli": "^6.4.1"
+  }
+}
