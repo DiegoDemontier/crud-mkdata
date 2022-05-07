@@ -3,20 +3,12 @@ const { customerSchema } = require('../../utils/schemas');
 const { Conflict, badRequest } = require('../../utils/statusCode');
 const errorConstructor = require('../../utils/errorHandling');
 
-// eslint-disable-next-line max-lines-per-function
-const handleDocument = (document, client) => {
+const handleDocument = (document, customer) => {
   document.forEach(async ({ nomeDocumento, dadoDocumento }) => {
-    let getDocument = await documentos.findOne({ where: { nomeDocumento } });
-    console.log(getDocument);
-    if (!getDocument) {
-      getDocument = await documentos.create({
-        nomeDocumento,
-      });
-    }
-
+    const [doc] = await documentos.findOrCreate({ where: { nomeDocumento } });
     await documentosClientes.create({
-      clienteId: client.id,
-      documentoId: getDocument.id,
+      clienteId: customer.id,
+      documentoId: doc.id,
       dadoDocumento,
     });
   });
@@ -42,14 +34,14 @@ module.exports = async (data) => {
   await handleError(data);
 
   const getGroup = await grupos.findOne({ where: { nome: grupo } });
-  const client = await clientes.create({
+  const customer = await clientes.create({
     nomeCliente,
     ativo,
     tipo,
     grupoId: getGroup.id,
   });
 
-  handleDocument(documentosCliente, client);
+  handleDocument(documentosCliente, customer);
 
   return null;
 };
