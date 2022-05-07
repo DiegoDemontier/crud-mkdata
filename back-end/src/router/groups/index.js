@@ -10,7 +10,7 @@ const groupsRoutes = express.Router();
 
 groupsRoutes.get('/', findAllGroups);
 groupsRoutes.post('/', createGroup);
-groupsRoutes.put('/', editGroup);
+groupsRoutes.put('/:id', editGroup);
 groupsRoutes.delete('/:id', deleteGroup);
 
 module.exports = groupsRoutes;
