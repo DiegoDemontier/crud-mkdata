@@ -3,37 +3,46 @@ const { customerSchema } = require('../../utils/schemas');
 const errorConstructor = require('../../utils/errorHandling');
 const { notFound, badRequest, Conflict } = require('../../utils/statusCode');
 
-/* const handleDocument = (document, id) => {
-  document.forEach(async ({ nomeDocumento, dadoDocumento }) => {
+const handleDocument = (document, docId, id) => {
+  document.forEach(async ({ nomeDocumento, dadoDocumento }, index) => {
     const [doc] = await documentos.findOrCreate({ where: { nomeDocumento } });
 
     await documentosClientes.update({ 
       dadoDocumento,
-     }, { where: { clienteId: id } });
+      clienteId: id,
+      documentoId: doc.id,
+     }, { where: { clienteId: id, documentoId: docId[index] } });
   });
-}; */
+};
 
-const handleError = async (data) => {
+const handleError = async (data, id) => {
   const { nomeCliente, tipo, ativo, grupo, documentosCliente } = data;
-  
+
+  const customer = await clientes.findByPk(id);
+  if (!customer) throw errorConstructor(notFound, 'Cliente não existe');
+
   const { error } = customerSchema.validate({ nomeCliente, tipo, ativo, grupo, documentosCliente });
   if (error) throw errorConstructor(badRequest, error.message);
 
-  // faz um array contendo os dados dos documentos cadastrados
+  // faz um array contendo os dados dos documentos alterados
   const arrayDocuments = documentosCliente.map(({ dadoDocumento }) => dadoDocumento);
-  const documentExists = await documentosClientes
+  const customerExists = await documentosClientes
   .findAll({ where: { dadoDocumento: arrayDocuments } });
 
-  // lança um erro caso o cliente já tenha um documento cadastrado
-  if (documentExists.length > 0) throw errorConstructor(Conflict, 'Documento já cadastrado');
+  customerExists.forEach((e) => {
+    // se algum cliente já existe com o numero do documentro cadastrado, retorna um erro
+    if (Number(e.dataValues.clienteId) !== Number(id)) {
+      throw errorConstructor(Conflict, 'Documento já cadastrado com outro cliente');
+    }
+  });
 };
 
 module.exports = async (data) => {
-  await handleError(data);
   const { id, nomeCliente, tipo, ativo, grupo, documentosCliente } = data;
+  await handleError(data, id);
 
-  const customer = await grupos.findByPk(id);
-  if (!customer) throw errorConstructor(notFound, 'Cliente não existe');
+  const findDocument = await documentosClientes.findAll({ where: { clienteId: id } });
+  const documentsId = findDocument.map(({ documentoId }) => documentoId);
 
   const getGroup = await grupos.findOne({ where: { nome: grupo } });
   await clientes.update({ 
@@ -43,7 +52,7 @@ module.exports = async (data) => {
     grupoId: getGroup.id,
    }, { where: { id } });
 
-   // await handleDocument(documentosCliente, id);
+   handleDocument(documentosCliente, documentsId, id);
 
   return null;
 };
