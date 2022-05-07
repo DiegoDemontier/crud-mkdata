@@ -12,6 +12,7 @@ app.use(cors());
 
 app.use('/groups', groupsRoutes);
 app.use('/customers', customersRoutes);
+app.use('/', (req, res) => res.send('Api is running'));
 app.use(errorMiddleware);
 
 module.exports = app;
