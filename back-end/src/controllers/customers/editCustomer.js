@@ -1,5 +1,5 @@
 const { success } = require('../../utils/statusCode');
-const editCustomer = require('../../services/groups/editCustomer');
+const editCustomer = require('../../services/customers/editCustomer');
 
 module.exports = async (req, res, next) => {
   try {
