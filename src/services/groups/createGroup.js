@@ -10,7 +10,7 @@ module.exports = async (nome, ativo) => {
   const nomeExists = await grupos.findOne({ where: { nome } });
   if (nomeExists) throw errorConstructor(Conflict, 'Grupo já cadastrado');
 
-  await grupos.create({ nome, ativo });
+  const group = await grupos.create({ nome, ativo });
 
-  return null;
+  return group;
 };

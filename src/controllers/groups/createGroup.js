@@ -5,9 +5,9 @@ module.exports = async (req, res, next) => {
   try {
     const { nome, ativo } = req.body;
 
-    await createGroup(nome, ativo);
+    const group = await createGroup(nome, ativo);
     
-    return res.status(created).json({ message: 'Grupo criado com sucesso' });
+    return res.status(created).json(group);
   } catch (error) {
     console.log(`ERROR CREATE GROUPS -> ${error.message}`);
     return next(error);

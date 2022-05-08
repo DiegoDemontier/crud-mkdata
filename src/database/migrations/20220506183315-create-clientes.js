@@ -16,6 +16,7 @@ module.exports = {
         allowNull: false,
         references: { model: 'grupos', key: 'id' },
         onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
       },
       nomeCliente: {
         field: 'nome_cliente',
