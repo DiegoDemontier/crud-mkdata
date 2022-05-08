@@ -29,6 +29,7 @@ const handleError = async (data) => {
   if (documentExists.length > 0) throw errorConstructor(Conflict, 'Documento já cadastrado');
 };
 
+// eslint-disable-next-line max-lines-per-function
 module.exports = async (data) => {
   const { nomeCliente, tipo, ativo, grupo, documentosCliente } = data;
   await handleError(data);
@@ -43,5 +44,5 @@ module.exports = async (data) => {
 
   handleDocument(documentosCliente, customer);
 
-  return null;
+  return customer;
 };

@@ -3,9 +3,9 @@ const createCustomer = require('../../services/customers/createCustomer');
 
 module.exports = async (req, res, next) => {
   try {
-    await createCustomer(req.body);
+    const getAllClient = await createCustomer(req.body);
     
-    return res.status(created).json({ message: 'Cliente criado com sucesso' });
+    return res.status(created).json(getAllClient);
   } catch (error) {
     console.log(`ERROR CREATE CUSTOMER -> ${error.message}`);
     return next(error);

@@ -7,11 +7,19 @@ const handleDocument = (document, docId, id) => {
   document.forEach(async ({ nomeDocumento, dadoDocumento }, index) => {
     const [doc] = await documentos.findOrCreate({ where: { nomeDocumento } });
 
-    await documentosClientes.update({ 
-      dadoDocumento,
-      clienteId: id,
-      documentoId: doc.id,
-     }, { where: { clienteId: id, documentoId: docId[index] } });
+    if (docId[index]) {
+      await documentosClientes.update({ 
+        dadoDocumento,
+        clienteId: id,
+        documentoId: doc.id,
+       }, { where: { clienteId: id, documentoId: docId[index] } });
+    } else {
+      await documentosClientes.create({
+        clienteId: id,
+        documentoId: doc.id,
+        dadoDocumento,
+      });
+    }
   });
 };
 
